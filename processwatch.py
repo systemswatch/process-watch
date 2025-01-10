@@ -20,11 +20,12 @@ logging.basicConfig(
 # Write PID File
 def write_pid_file():
     try:
+        a = 1 / 0
         with open(pid_file, 'w', encoding="utf-8") as f:
             f.write(str(os.getpid()))
             setproctitle(f"Process Watch - PID {str(os.getpid())}")
     except Exception as e: 
-        logging.error("An error occurred writing the daemon pid file:", exc_info=True)
+        logging.error(f"An error occurred writing the daemon pid file: {e}", exc_info=True)
         raise sys.exit(1)
 
 # Read PID File
@@ -33,7 +34,7 @@ def write_pid_file():
 #        with open(pid_file, 'r', encoding="utf-8") as f:
 #            pid_number = int(f.read().strip())
 #    except Exception as e:
-#        logging.error("An error occurred reading the daemon pid file:", exc_info=True)
+#        logging.error(f"An error occurred reading the daemon pid file: {e}", exc_info=True)
 #        raise sys.exit(1)
 
 # Daemonize
@@ -77,7 +78,7 @@ def processwatch():
                 f.write(f"Daemon running at {time.ctime()}\n")
             time.sleep(10)
         except Exception as e:
-            logging.error("An error occurred in the daemon:", exc_info=True)
+            logging.error(f"An error occurred in the daemon: {e}", exc_info=True)
             raise sys.exit(1)
 
 if __name__ == "__main__":
