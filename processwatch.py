@@ -11,38 +11,34 @@ pid_file = (f"{str(os.getcwd())}/pid/processwatch.pid")
 log_file = (f"{str(os.getcwd())}/logs/processwatch.log")
 output_file = (f"{str(os.getcwd())}/processwatch.out")
 
+# Configure Logging
+logging.basicConfig(
+    filename=log_file,
+    level=logging.INFO,
+)
+
+# Write PID File
 def write_pid_file():
     try:
         with open(pid_file, 'w', encoding="utf-8") as f:
             f.write(str(os.getpid()))
             setproctitle(f"Process Watch - PID {str(os.getpid())}")
-    except IOError as e: 
-        print(f"An error occurred: {e}")
+    except Exception as e: 
+        logging.error("An error occurred writing the daemon pid file: %s", e, exc_info=True)
+        raise sys.exit(1)
 
+# Read PID File
 #def read_pid_file():
 #    try:
 #        with open(pid_file, 'r', encoding="utf-8") as f:
 #            pid_number = int(f.read().strip())
-#    except FileNotFoundError as e:
-#        print(f"An error occurred: {e}")
+#    except Exception as e:
+#        logging.error("An error occurred reading the daemon pid file: %s", e, exc_info=True)
+#        raise sys.exit(1)
 
-def processwatch_log(logf):
-    ### This does the "work" of the daemon
+# Daemonize
+def processwatch():
 
-    logger = logging.getLogger('processwatch')
-    logger.setLevel(logging.INFO)
-
-    fh = logging.FileHandler(logf)
-    fh.setLevel(logging.INFO)
-
-    formatstr = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-    formatter = logging.Formatter(formatstr)
-
-    fh.setFormatter(formatter)
-
-    logger.addHandler(fh)
-
-def daemonize():
     # Fork the first child process
     pid = os.fork()
     if pid > 0:
@@ -71,17 +67,17 @@ def daemonize():
     os.dup2(0, 1)
     os.dup2(0, 2)
 
-    processwatch_log(log_file)
     write_pid_file()
 
-    # Run the daemon logic
+    # Run Daemon Logic
     while True:
         try:
             with open(output_file, "a", encoding="utf-8") as f:
                 f.write(f"Daemon running at {time.ctime()}\n")
             time.sleep(10)
-        except IOError as e:
-            print(f"An error occurred: {e}")
+        except Exception as e:
+            logging.error("An error occurred in the daemon: %s", e, exc_info=True)
+            raise sys.exit(1)
 
 if __name__ == "__main__":
-    daemonize()
+    processwatch()
