@@ -20,7 +20,6 @@ logging.basicConfig(
 # Write PID File
 def write_pid_file():
     try:
-        a = 1 / 0
         with open(pid_file, 'w', encoding="utf-8") as f:
             f.write(str(os.getpid()))
             setproctitle(f"Process Watch - PID {str(os.getpid())}")
@@ -73,7 +72,6 @@ def processwatch():
     # Run Daemon Logic
     while True:
         try:
-            a = 1 / 0
             with open(output_file, "a", encoding="utf-8") as f:
                 f.write(f"Daemon running at {time.ctime()}\n")
             time.sleep(10)
