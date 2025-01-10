@@ -33,7 +33,7 @@ def write_pid_file():
 #        with open(pid_file, 'r', encoding="utf-8") as f:
 #            pid_number = int(f.read().strip())
 #    except Exception as e:
-#        logging.error(f"An error occurred reading the daemon pid file: {e}", exc_info=True)
+#        logging.error("An error occurred reading the daemon pid file: %s", e, exc_info=True)
 #        raise sys.exit(1)
 
 # Daemonize
