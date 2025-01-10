@@ -111,6 +111,7 @@ disable=
     fixme,
     cyclic-import,
     import-error,
+    broad-except,
 
 
 [REPORTS]
