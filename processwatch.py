@@ -24,7 +24,7 @@ def write_pid_file():
             f.write(str(os.getpid()))
             setproctitle(f"Process Watch - PID {str(os.getpid())}")
     except Exception as e: 
-        logging.error(f"An error occurred writing the daemon pid file: {e}", exc_info=True)
+        logging.error("An error occurred writing the daemon pid file: %s", e, exc_info=True)
         raise sys.exit(1)
 
 # Read PID File
@@ -76,7 +76,7 @@ def processwatch():
                 f.write(f"Daemon running at {time.ctime()}\n")
             time.sleep(10)
         except Exception as e:
-            logging.error(f"An error occurred in the daemon: {e}", exc_info=True)
+            logging.error("An error occurred in the daemon: %s", e, exc_info=True)
             raise sys.exit(1)
 
 if __name__ == "__main__":
