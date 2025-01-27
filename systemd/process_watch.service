@@ -1,0 +1,13 @@
+[Unit]
+Description=Process Monitoring and Management
+After=network.target
+ 
+[Service]
+User=root
+Group=root
+WorkingDirectory=/usr/local/process_watch
+Environment="PATH=/usr/local/process_watch_env/bin"
+ExecStart=/usr/local/process_watch_env/bin/python process_watch.py
+ 
+[Install]
+WantedBy=multi-user.target
