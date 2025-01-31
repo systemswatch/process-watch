@@ -13,7 +13,7 @@ os.makedirs(os.getcwd() + "/logs", exist_ok=True)
 log_file = (f"{str(os.getcwd())}/logs/process_watch.log")
 
 logging.basicConfig(
-    handlers = [logging.FileHandler(log_file), logging.StreamHandler()], 
+    handlers = [logging.FileHandler(log_file), logging.StreamHandler()],
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
 )
