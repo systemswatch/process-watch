@@ -2,8 +2,8 @@ import os
 import sys
 import time
 import logging
-import psutil
 import importlib
+import psutil
 
 sys.dont_write_bytecode = True
 sys.path.append('watch_list')
