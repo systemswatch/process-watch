@@ -2,8 +2,8 @@ import os
 import sys
 import time
 import logging
-import importlib
 import psutil
+import importlib
 
 sys.dont_write_bytecode = True
 sys.path.append('watch_list')
@@ -14,10 +14,8 @@ log_file = (f"{str(os.getcwd())}/logs/process_watch.log")
 
 logging.basicConfig(
     handlers = [logging.FileHandler(log_file), logging.StreamHandler()], 
-    #filename=log_file,
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
-    #stream=sys.stdout,
 )
 
 # Dynamic Import of Modules in Watch List Directory
