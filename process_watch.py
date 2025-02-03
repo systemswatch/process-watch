@@ -1,10 +1,7 @@
 import os
 import sys
-import time
 import logging
 import importlib
-import threading
-import psutil
 
 sys.dont_write_bytecode = True
 sys.path.append('watch_list')
