@@ -36,7 +36,7 @@ def service_profiler():
         if pid:
             return pid
         else:
-            return ("\nProcess N/A.")
+            return ("Process N/A.")
 
     # Identify Process By Name Return Memory Usage
     def find_memory_by_name(name):
@@ -46,7 +46,7 @@ def service_profiler():
         if memory_usage:
             return (f"{{memory_usage / (1024 * 1024):.2f}}")
         else:
-            return ("\nProcess N/A.")
+            return ("Process N/A.")
 
     # Identify Process By Name Return CPU % Usage
     def find_cpu_by_name(name):
@@ -58,7 +58,7 @@ def service_profiler():
         if cpu_usage:
             return cpu_usage
         else:
-            return ("\nProcess not found.")
+            return ("Process not found.")
 
     def monitor():
 
@@ -68,7 +68,7 @@ def service_profiler():
                     f.write(f"{service_name} running at {{time.ctime()}} {service_name} PID: {{find_procs_by_name('{service_name}')}}, Memory: {{find_memory_by_name('{service_name}')}}MB, CPU: {{find_cpu_by_name('{service_name}')}}%\\n")
                 time.sleep({interval})
             except Exception as e:
-                logging.error("\nAn error occurred in Process Watch: %s", e, exc_info=True)
+                logging.error("An error occurred in Process Watch: %s", e, exc_info=True)
                 raise sys.exit(1)
 
     def worker():
