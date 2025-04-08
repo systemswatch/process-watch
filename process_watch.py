@@ -30,5 +30,3 @@ def import_watch_list():
             raise sys.exit(1)
 
 import_watch_list()
-
-#if __name__ == "__main__":
