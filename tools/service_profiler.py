@@ -1,23 +1,38 @@
+#!/usr/bin/env python
 import os
 import textwrap
 
+# Menu ANSI Colors
+BLACK = '\033[30m'
+GREEN = '\033[32m'
+BRIGHT_GREEN = '\033[92m'
+BRIGHT_CYAN = '\033[96m'
+BRIGHT_YELLOW = '\033[93m'
+BACKGROUND_BRIGHT_MAGENTA = '\033[105m'
+RESET = '\033[0m'
+
+# Reset Sceen
 def clear_screen():
     os.system('cls' if os.name == 'nt' else 'clear')
 
+# Write configuration file to watch_list directory
 def write_to_file(filename, template):
     try:
         with open(os.path.join(os.pardir, "watch_list", filename), 'w') as file:
             file.write(template)
         clear_screen()
-        print(f"\n'{filename}' watch list configuration created.")
+        print(f"\n{GREEN}'{filename}' configuration created.{RESET}")
     except Exception as e:
-        print(f"\nAn error occurred: {e}")
+        print(f"{BLACK}{BACKGROUND_BRIGHT_MAGENTA}\nAn error occurred: {e}{RESET}")
 
+# Service Profiler Menu
 def service_profiler():
-    filename = input("\nEnter the logging watch list configuration file to create:\n")
+    print(f"\n{BRIGHT_GREEN}SERVICE PROFILER SETTINGS:{RESET}")
+    filename = input(f"\n{BRIGHT_CYAN}Enter the name of the configuration file:{RESET}\n")
     sanitized_filename = filename.replace(".", "-")
-    service_name = input("\nEnter the service name to monitor:\n")
-    interval = input("\nEnter the monitoring interval in seconds:\n")
+    service_name = input(f"\n{BRIGHT_CYAN}Enter the service name to monitor:{RESET}\n")
+    interval = input(f"\n{BRIGHT_CYAN}Enter the monitoring interval in seconds:{RESET}\n")
+    # Service Profiler Template
     template = f"""
     import os
     import sys
@@ -77,4 +92,5 @@ def service_profiler():
 
     worker()
     """
+    # Write the template into the config
     write_to_file(os.path.abspath(f"../watch_list/{sanitized_filename}.py"), textwrap.dedent(template))
