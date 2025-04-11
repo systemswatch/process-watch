@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+
 import os
 import sys
 from service_profiler import service_profiler
@@ -117,9 +118,8 @@ def display_menu():
         elif top_choice == '4':
             print(f"\n{BRIGHT_GREEN}Quitting...{RESET}")
             break
-        else:
-            clear_screen()
-            print(f"\n{BLACK}{BACKGROUND_BRIGHT_MAGENTA}Invalid choice. Please try again.{RESET}")
+        clear_screen()
+        print(f"\n{BLACK}{BACKGROUND_BRIGHT_MAGENTA}Invalid choice. Please try again.{RESET}")
 
 if __name__ == "__main__":
     display_menu()
