@@ -6,7 +6,6 @@ import os
 import logging
 import importlib
 
-
 # Logging Configuration
 os.makedirs(os.getcwd() + "/logs", exist_ok=True)
 log_file = (f"{str(os.getcwd())}/logs/process_watch.log")

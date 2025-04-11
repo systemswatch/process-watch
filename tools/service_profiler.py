@@ -18,7 +18,7 @@ def clear_screen():
 # Write configuration file to watch_list directory
 def write_to_file(filename, template):
     try:
-        with open(os.path.join(os.pardir, "watch_list", filename), 'w') as file:
+        with open(os.path.join(os.pardir, "watch_list", filename), 'w', encoding="utf-8") as file:
             file.write(template)
         clear_screen()
         print(f"\n{GREEN}'{filename}' configuration created.{RESET}")

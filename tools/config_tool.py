@@ -1,9 +1,9 @@
 #!/usr/bin/env python
-import sys
-sys.dont_write_bytecode = True
 import os
-import textwrap
+import sys
 from service_profiler import service_profiler
+sys.dont_write_bytecode = True
+
 
 # Menu ANSI Colors
 BLACK = '\033[30m'

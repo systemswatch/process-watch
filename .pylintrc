@@ -2,7 +2,8 @@
 
 disable=
     C0114, # missing-module-docstring
-    C0116  # missing-function-docstring
+    C0116,  # missing-function-docstring
+    W0141  # Python 3 accounts for input issue
 
 # Specify a configuration file.
 #rcfile=
