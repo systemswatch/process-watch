@@ -91,8 +91,7 @@ def display_menu():
                 if filename == 'e':
                     clear_screen()
                     break
-                else:
-                    delete_file("../watch_list", filename)
+                delete_file("../watch_list", filename)
         elif top_choice == '3':
             clear_screen()
             while True:
@@ -105,11 +104,11 @@ def display_menu():
                     clear_screen()
                     service_profiler()
                     break
-                elif watch_list_choice == '2':
+                if watch_list_choice == '2':
                     clear_screen()
                     service_profiler()
                     break
-                elif watch_list_choice == '3':
+                if watch_list_choice == '3':
                     print(f"\n{BRIGHT_GREEN}Exiting...{RESET}")
                     break
                 else:
