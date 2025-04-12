@@ -110,7 +110,6 @@ def display_menu():
                     print('TBD')
                     break
                 if watch_list_choice == '3':
-                    print(f"\n{BRIGHT_GREEN}Exiting...{RESET}")
                     break
                 clear_screen()
                 print(f"\n{BLACK}{BACKGROUND_BRIGHT_MAGENTA}Invalid choice. Please try again.{RESET}")                  
