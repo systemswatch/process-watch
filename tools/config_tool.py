@@ -105,11 +105,11 @@ def display_menu():
                     clear_screen()
                     service_profiler()
                     break
-                elif watch_list_choice == '2':
+                if watch_list_choice == '2':
                     clear_screen()
                     print('TBD')
                     break
-                elif watch_list_choice == '3':
+                if watch_list_choice == '3':
                     print(f"\n{BRIGHT_GREEN}Exiting...{RESET}")
                     break
                 clear_screen()
