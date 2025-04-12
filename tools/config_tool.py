@@ -105,21 +105,21 @@ def display_menu():
                     clear_screen()
                     service_profiler()
                     break
-                if watch_list_choice == '2':
+                elif watch_list_choice == '2':
                     clear_screen()
                     service_profiler()
                     break
-                if watch_list_choice == '3':
+                elif watch_list_choice == '3':
                     print(f"\n{BRIGHT_GREEN}Exiting...{RESET}")
                     break
-                else:
-                    clear_screen()
-                    print(f"\n{BLACK}{BACKGROUND_BRIGHT_MAGENTA}Invalid choice. Please try again.{RESET}")                  
+                clear_screen()
+                print(f"\n{BLACK}{BACKGROUND_BRIGHT_MAGENTA}Invalid choice. Please try again.{RESET}")                  
         elif top_choice == '4':
             print(f"\n{BRIGHT_GREEN}Quitting...{RESET}")
             break
-        clear_screen()
-        print(f"\n{BLACK}{BACKGROUND_BRIGHT_MAGENTA}Invalid choice. Please try again.{RESET}")
+        else:
+            clear_screen()
+            print(f"\n{BLACK}{BACKGROUND_BRIGHT_MAGENTA}Invalid choice. Please try again.{RESET}")
 
 if __name__ == "__main__":
     display_menu()
