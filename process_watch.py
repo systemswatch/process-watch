@@ -1,10 +1,11 @@
-import sys
-sys.dont_write_bytecode = True
-sys.path.append('watch_list')
+#!/usr/bin/env python
+
 import os
 import logging
 import importlib
-
+import sys
+sys.dont_write_bytecode = True
+sys.path.append('watch_list')
 
 # Logging Configuration
 os.makedirs(os.getcwd() + "/logs", exist_ok=True)
@@ -30,5 +31,3 @@ def import_watch_list():
             raise sys.exit(1)
 
 import_watch_list()
-
-#if __name__ == "__main__":
