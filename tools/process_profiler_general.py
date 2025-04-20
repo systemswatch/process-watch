@@ -19,11 +19,14 @@ def clear_screen():
 
 # Identify Process By Name Return PID
 def find_pid_by_name(name):
-    all_pids = subprocess.Popen(['pgrep', '-f', name], shell=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
-    output, errors = all_pids.communicate()
-    all_pids_array = output.strip().split("\n")
-    first_pid = all_pids_array[0]
-    return first_pid
+    try:
+        with subprocess.Popen(['pgrep', '-f', name], shell=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True) as all_pids:
+            output, errors = all_pids.communicate()
+            all_pids_array = output.strip().split("\n")
+            first_pid = all_pids_array[0]
+        return first_pid
+    except Exception as e:
+        print(f"{BLACK}{BACKGROUND_BRIGHT_MAGENTA}\nAn error occurred: {e}{RESET}")
 
 # Write configuration file to watch_list directory
 def write_to_file(filename, template):
@@ -55,13 +58,16 @@ def process_profiler_general():
 
     output_file = (f"{{str(os.getcwd())}}/logs/process_watch.log")
 
-    # Identify Process By Name Return PID
     def find_pid_by_name(name):
-        all_pids = subprocess.Popen(['pgrep', '-f', name], shell=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
-        output, errors = all_pids.communicate()
-        all_pids_array = output.strip().split("\\n")
-        first_pid = all_pids_array[0]
-        return first_pid
+        try:
+            with subprocess.Popen(['pgrep', '-f', name], shell=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True) as all_pids:
+                output, errors = all_pids.communicate()
+                all_pids_array = output.strip().split("\\n")
+                first_pid = all_pids_array[0]
+            return first_pid
+        except Exception as e:
+            logging.error("An error occurred in Process Watch: %s", e, exc_info=True)
+            raise sys.exit(1)
 
     process_id = int(find_pid_by_name("{process_name}"))
 
