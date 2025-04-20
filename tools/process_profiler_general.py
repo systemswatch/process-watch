@@ -24,6 +24,7 @@ def find_pid_by_name(name):
             output, errors = all_pids.communicate()
             if errors:
                 print(f"Errors:\n{errors.decode()}")
+                return None
             else:
                 all_pids_array = output.strip().split("\n")
                 first_pid = all_pids_array[0]
