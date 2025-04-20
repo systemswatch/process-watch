@@ -2,9 +2,8 @@
 
 import os
 import sys
-from service_profiler import service_profiler
+from process_profiler_general import process_profiler_general
 sys.dont_write_bytecode = True
-
 
 # Menu ANSI Colors
 BLACK = '\033[30m'
@@ -68,7 +67,7 @@ def display_menu():
         print(f"\n{BRIGHT_GREEN}PROCESS WATCH OPTIONS{RESET}\n")
         print("1. List Configuration Files.")
         print("2. Delete a Configuration.")
-        print("3. Create a Service Profile Configuration.")
+        print("3. Create a Process Profile Configuration.")
         print("4. Quit")
         
         top_choice = input(f"\n{BRIGHT_CYAN}Enter your choice (1-4):{RESET}\n")
@@ -97,17 +96,16 @@ def display_menu():
             clear_screen()
             while True:
                 print(f"\n{BRIGHT_GREEN}PROCESS WATCH CONFIGURATION CREATION OPTIONS{RESET}\n")
-                print("1. Create Service Profiler")
-                print("2. Create TBD")
+                print("1. Create General Profiler")
+                print("2. Create Memory Profiler")
                 print("3. Exit")
                 watch_list_choice = input(f"\n{BRIGHT_CYAN}Enter your choice (1-3):{RESET}\n")
                 if watch_list_choice == '1':
                     clear_screen()
-                    service_profiler()
+                    process_profiler_general()
                     break
                 if watch_list_choice == '2':
                     clear_screen()
-                    print('TBD')
                     break
                 if watch_list_choice == '3':
                     break
