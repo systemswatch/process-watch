@@ -2,7 +2,7 @@
 
 import os
 import sys
-from process_profiler_general import process_profiler_general
+from general_process_profiler import general_process_profiler
 sys.dont_write_bytecode = True
 
 # Menu ANSI Colors
@@ -96,13 +96,13 @@ def display_menu():
             clear_screen()
             while True:
                 print(f"\n{BRIGHT_GREEN}PROCESS WATCH CONFIGURATION CREATION OPTIONS{RESET}\n")
-                print("1. Create General Profiler")
-                print("2. Create Memory Profiler")
+                print("1. Create General Process Profiler")
+                print("2. Create Memory Process Profiler")
                 print("3. Exit")
                 watch_list_choice = input(f"\n{BRIGHT_CYAN}Enter your choice (1-3):{RESET}\n")
                 if watch_list_choice == '1':
                     clear_screen()
-                    process_profiler_general()
+                    general_process_profiler()
                     break
                 if watch_list_choice == '2':
                     clear_screen()

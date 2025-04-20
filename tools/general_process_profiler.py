@@ -42,16 +42,17 @@ def write_to_file(filename, template):
     except Exception as e:
         print(f"{BLACK}{BACKGROUND_BRIGHT_MAGENTA}\nAn error occurred: {e}{RESET}")
 
-# Process Profiler General Menu
-def process_profiler_general():
+# General Process Profiler Menu
+def general_process_profiler():
     print(f"\n{BRIGHT_GREEN}SERVICE PROFILER GENERAL SETTINGS:{RESET}")
     filename = input(f"\n{BRIGHT_CYAN}Enter the name of the configuration file:{RESET}\n")
     sanitized_filename = filename.replace(".", "-")
     process_name = input(f"\n{BRIGHT_CYAN}Enter the process name to monitor:{RESET}\n")
     process_id = int(find_pid_by_name(process_name))
     interval = input(f"\n{BRIGHT_CYAN}Enter the monitoring interval in seconds:{RESET}\n")
-    # Service Profiler General Template
+    # General Process Profiler Template
     template = f"""
+    # General Process Profiler
     import os
     import sys
     import time
