@@ -68,10 +68,10 @@ def process_profiler_general():
                 output, errors = all_pids.communicate()
                 if errors:
                     logging.error(f"Errors:\\n{{errors.decode()}}")
-                else:
-                    all_pids_array = output.strip().split("\\n")
-                    first_pid = all_pids_array[0]
-                    return first_pid
+                    return None
+                all_pids_array = output.strip().split("\\n")
+                first_pid = all_pids_array[0]
+                return first_pid
         except Exception as e:
             logging.error("An error occurred in Process Watch: %s", e, exc_info=True)
             raise sys.exit(1)
