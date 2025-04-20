@@ -25,10 +25,9 @@ def find_pid_by_name(name):
             if errors:
                 print(f"Errors:\n{errors.decode()}")
                 return None
-            else:
-                all_pids_array = output.strip().split("\n")
-                first_pid = all_pids_array[0]
-                return first_pid
+            all_pids_array = output.strip().split("\n")
+            first_pid = all_pids_array[0]
+            return first_pid
     except Exception as e:
         print(f"{BLACK}{BACKGROUND_BRIGHT_MAGENTA}\nAn error occurred: {e}{RESET}")
         return None
