@@ -27,6 +27,7 @@ def find_pid_by_name(name):
         return first_pid
     except Exception as e:
         print(f"{BLACK}{BACKGROUND_BRIGHT_MAGENTA}\nAn error occurred: {e}{RESET}")
+        return None
 
 # Write configuration file to watch_list directory
 def write_to_file(filename, template):
