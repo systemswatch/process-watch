@@ -22,11 +22,14 @@ def find_pid_by_name(name):
     try:
         with subprocess.Popen(['pgrep', '-f', name], shell=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True) as all_pids:
             output, errors = all_pids.communicate()
-            all_pids_array = output.strip().split("\n")
-            first_pid = all_pids_array[0]
-        return first_pid
+            if errors:
+                print(f"Errors:\n{errors.decode()}")
+            else:
+                all_pids_array = output.strip().split("\n")
+                first_pid = all_pids_array[0]
+                return first_pid
     except Exception as e:
-        print(f"{BLACK}{BACKGROUND_BRIGHT_MAGENTA}\nAn error occurred: {errors} {e}{RESET}")
+        print(f"{BLACK}{BACKGROUND_BRIGHT_MAGENTA}\nAn error occurred: {e}{RESET}")
         return None
 
 # Write configuration file to watch_list directory
@@ -63,12 +66,16 @@ def process_profiler_general():
         try:
             with subprocess.Popen(['pgrep', '-f', name], shell=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True) as all_pids:
                 output, errors = all_pids.communicate()
-                all_pids_array = output.strip().split("\\n")
-                first_pid = all_pids_array[0]
-            return first_pid
+                if errors:
+                    logging.error(f"Errors:\\n{{errors.decode()}}")
+                else:
+                    all_pids_array = output.strip().split("\\n")
+                    first_pid = all_pids_array[0]
+                    return first_pid
         except Exception as e:
             logging.error("An error occurred in Process Watch: %s", e, exc_info=True)
             raise sys.exit(1)
+            return None
 
     process_id = int(find_pid_by_name("{process_name}"))
 
