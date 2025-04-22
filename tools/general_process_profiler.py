@@ -78,8 +78,6 @@ def general_process_profiler():
             raise sys.exit(1)
             return None
 
-    process_id = int(find_pid_by_name("{process_name}"))
-
     def find_memory_usage_by_pid(pid):
         process = psutil.Process(pid)
         memory_info = process.memory_info()
@@ -103,7 +101,7 @@ def general_process_profiler():
         while True:
             try:
                 with open(output_file, "a", encoding="utf-8") as f:
-                    f.write(f"{process_name} running at local time {{time.ctime()}} PID: {process_id}, Memory: {{find_memory_usage_by_pid({process_id})}}MB, CPU: {{find_cpu_usage_by_pid({process_id})}}%\\n")
+                    f.write(f"{process_name} running at local time {{time.ctime()}} PID: {{int(find_pid_by_name('{process_name}'))}}, Memory: {{find_memory_usage_by_pid(int(find_pid_by_name('{process_name}')))}}MB, CPU: {{find_cpu_usage_by_pid(int(find_pid_by_name('{process_name}')))}}%\\n")
                 time.sleep({interval})
             except Exception as e:
                 logging.error("An error occurred in Process Watch: %s", e, exc_info=True)
@@ -117,3 +115,4 @@ def general_process_profiler():
     """
     # Write the template into a  config
     write_to_file(os.path.abspath(f"../watch_list/{sanitized_filename}.py"), textwrap.dedent(template))
+
