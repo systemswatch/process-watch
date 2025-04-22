@@ -48,7 +48,6 @@ def general_process_profiler():
     filename = input(f"\n{BRIGHT_CYAN}Enter the name of the configuration file:{RESET}\n")
     sanitized_filename = filename.replace(".", "-")
     process_name = input(f"\n{BRIGHT_CYAN}Enter the process name to monitor:{RESET}\n")
-    process_id = int(find_pid_by_name(process_name))
     interval = input(f"\n{BRIGHT_CYAN}Enter the monitoring interval in seconds:{RESET}\n")
     # General Process Profiler Template
     template = f"""
