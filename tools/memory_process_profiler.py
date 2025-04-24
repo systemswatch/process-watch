@@ -98,9 +98,9 @@ def memory_process_profiler():
                 time.sleep({interval})
             except Exception as e:
                 print(f"An error occurred in Process Watch configuration file {sanitized_filename}: {{e}}")
-                f = open(error_file, "a", encoding="utf-8")
-                f.write(str(e) + (f" in {sanitized_filename}") + "\\n")
-                raise sys.exit(1)
+                with open(error_file, "a", encoding="utf-8") as file:
+                    file.write(str(e) + (f" in {sanitized_filename}") + "\\n")
+                    raise sys.exit(1)
 
     def worker():
         monitor_thread = threading.Thread(target=monitor)

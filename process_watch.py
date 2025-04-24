@@ -29,8 +29,8 @@ def import_watch_list():
                 gbl[module_name] = importlib.import_module(f"{module_name}")
         except Exception as e:
             print(f"An error occurred in Process Watch: {e}")
-            f = open(error_file, "a", encoding="utf-8")
-            f.write(str(e) + "\n")
-            raise sys.exit(1)
+            with open(error_file, "a", encoding="utf-8") as file:
+                file.write(str(e) + "\n")
+                raise sys.exit(1)
 
 import_watch_list()
