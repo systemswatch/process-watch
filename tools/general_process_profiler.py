@@ -3,6 +3,8 @@
 import os
 import textwrap
 import subprocess
+import sys
+sys.dont_write_bytecode = True
 
 # Menu ANSI Colors
 BLACK = '\033[30m'
@@ -44,7 +46,7 @@ def write_to_file(filename, template):
 
 # General Process Profiler Menu
 def general_process_profiler():
-    print(f"\n{BRIGHT_GREEN}SERVICE PROFILER GENERAL SETTINGS:{RESET}")
+    print(f"\n{BRIGHT_GREEN}GENERAL PROCESS PROFILER SETTINGS:{RESET}")
     filename = input(f"\n{BRIGHT_CYAN}Enter the name of the configuration file:{RESET}\n")
     sanitized_filename = filename.replace(".", "-")
     process_name = input(f"\n{BRIGHT_CYAN}Enter the process name to monitor:{RESET}\n")
@@ -60,7 +62,8 @@ def general_process_profiler():
     import psutil
     import subprocess
 
-    output_file = (f"{{str(os.getcwd())}}/logs/process_watch.log")
+    general_process_profiler_file = (f"{{str(os.getcwd())}}/logs/{sanitized_filename}-general-profile.log")
+    error_file = (f"{{str(os.getcwd())}}/logs/error.log")
 
     def find_pid_by_name(name):
         try:
@@ -96,14 +99,15 @@ def general_process_profiler():
             return ("0.0")
 
     def monitor():
-
         while True:
             try:
-                with open(output_file, "a", encoding="utf-8") as f:
+                with open(general_process_profiler_file, "a", encoding="utf-8") as f:
                     f.write(f"{process_name} running at local time {{time.ctime()}} PID: {{int(find_pid_by_name('{process_name}'))}}, Memory: {{find_memory_usage_by_pid(int(find_pid_by_name('{process_name}')))}}MB, CPU: {{find_cpu_usage_by_pid(int(find_pid_by_name('{process_name}')))}}%\\n")
                 time.sleep({interval})
             except Exception as e:
-                logging.error("An error occurred in Process Watch: %s", e, exc_info=True)
+                print(f"An error occurred in Process Watch configuration file {sanitized_filename}: {{e}}")
+                f = open(error_file, "a", encoding="utf-8")
+                f.write(str(e) + (f" in {sanitized_filename}") + "\\n")
                 raise sys.exit(1)
 
     def worker():
@@ -112,6 +116,6 @@ def general_process_profiler():
 
     worker()
     """
-    # Write the template into a  config
+    # Write the template into a config
     write_to_file(os.path.abspath(f"../watch_list/{sanitized_filename}.py"), textwrap.dedent(template))
 
