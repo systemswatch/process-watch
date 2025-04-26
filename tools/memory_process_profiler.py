@@ -51,7 +51,8 @@ def memory_process_profiler():
     sanitized_filename = filename.replace(".", "-")
     process_name = input(f"\n{BRIGHT_CYAN}Enter the process name to monitor:{RESET}\n")
     interval = input(f"\n{BRIGHT_CYAN}Enter the monitoring interval in seconds:{RESET}\n")
-    # Memory Process Profiler Template
+    memory_threshold = input(f"\n{BRIGHT_CYAN}Enter the memory threshold of the process (in MB):{RESET}\n")
+    action = input(f"\n{BRIGHT_CYAN}Enter the action to take upon the memory threshold being met:{RESET}\n")
     template = f"""
     # Memory Process Profiler
     import os
@@ -93,8 +94,11 @@ def memory_process_profiler():
     def monitor():
         while True:
             try:
-                with open(memory_process_profiler_file, "a", encoding="utf-8") as f:
-                    f.write(f"{process_name} running at local time {{time.ctime()}} PID: {{int(find_pid_by_name('{process_name}'))}}, Memory: {{find_memory_usage_by_pid(int(find_pid_by_name('{process_name}')))}}MB\\n")
+                process_pid = find_pid_by_name('{process_name}')
+                process_memory_set = {{find_memory_usage_by_pid(int(find_pid_by_name('{process_name}')))}}
+                process_memory = int(process_memory_set.pop())
+                if int(process_memory) >= {memory_threshold}:
+                    process_action = subprocess.run(['{action}'], capture_output=True, text=True)
                 time.sleep({interval})
             except Exception as e:
                 print(f"An error occurred in Process Watch configuration file {sanitized_filename}: {{e}}")
