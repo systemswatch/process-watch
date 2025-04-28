@@ -6,6 +6,10 @@ import subprocess
 import sys
 sys.dont_write_bytecode = True
 
+# Base Directory
+base_dir = os.path.dirname(os.path.abspath(__file__))
+os.chdir(base_dir)
+
 # Menu ANSI Colors
 BLACK = '\033[30m'
 GREEN = '\033[32m'
