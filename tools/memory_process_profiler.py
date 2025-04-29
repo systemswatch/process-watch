@@ -19,7 +19,7 @@ BRIGHT_YELLOW = '\033[93m'
 BACKGROUND_BRIGHT_MAGENTA = '\033[105m'
 RESET = '\033[0m'
 
-# Reset Sceen
+# Reset Screen
 def clear_screen():
     os.system('cls' if os.name == 'nt' else 'clear')
 
@@ -54,8 +54,18 @@ def memory_process_profiler():
     filename = input(f"\n{BRIGHT_CYAN}Enter the name of the configuration file:{RESET}\n")
     sanitized_filename = filename.replace(".", "-")
     process_name = input(f"\n{BRIGHT_CYAN}Enter the process name to monitor:{RESET}\n")
-    interval = input(f"\n{BRIGHT_CYAN}Enter the monitoring interval in seconds:{RESET}\n")
-    memory_threshold = input(f"\n{BRIGHT_CYAN}Enter the memory threshold of the process (in MB):{RESET}\n")
+    while True:
+        try:
+            interval = int(input(f"\n{BRIGHT_CYAN}Enter the monitoring interval in seconds:{RESET}\n"))
+            break
+        except ValueError:
+            print(f"{BLACK}{BACKGROUND_BRIGHT_MAGENTA}\nInvalid input. Please enter a number of seconds.{RESET}")
+    while True:
+        try:
+            memory_threshold = int(input(f"\n{BRIGHT_CYAN}Enter the memory threshold of the process (in MB):{RESET}\n"))
+            break
+        except ValueError:
+            print(f"{BLACK}{BACKGROUND_BRIGHT_MAGENTA}\nInvalid input. Please enter a number of Megabytes.{RESET}")
     action = input(f"\n{BRIGHT_CYAN}Enter the action to take upon the memory threshold being met:{RESET}\n")
     template = f"""
     # Memory Process Profiler
@@ -116,6 +126,6 @@ def memory_process_profiler():
 
     worker()
     """
-    # Write the template into a  config
+    # Write the template into a config
     write_to_file(os.path.abspath(f"../watch_list/{sanitized_filename}.py"), textwrap.dedent(template))
 
