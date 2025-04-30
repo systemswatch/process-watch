@@ -6,8 +6,7 @@ After=network.target
 User=root
 Group=root
 WorkingDirectory=/usr/local/process_watch
-Environment="PATH=/usr/local/process_watch_env/bin"
-ExecStart=/usr/local/process_watch_env/bin/python process_watch.py
+ExecStart=/usr/bin/python3 /usr/local/process_watch/process_watch.py
  
 [Install]
 WantedBy=multi-user.target

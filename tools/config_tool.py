@@ -1,10 +1,10 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
-import os
 import sys
+sys.dont_write_bytecode = True
+import os
 from general_process_profiler import general_process_profiler
 from memory_process_profiler import memory_process_profiler
-sys.dont_write_bytecode = True
 
 # Menu ANSI Colors
 BLACK = '\033[30m'

@@ -1,10 +1,10 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
+import sys
+sys.dont_write_bytecode = True
 import os
 import textwrap
 import subprocess
-import sys
-sys.dont_write_bytecode = True
 
 # Menu ANSI Colors
 BLACK = '\033[30m'
