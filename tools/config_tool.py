@@ -3,6 +3,7 @@
 import os
 import sys
 from general_process_profiler import general_process_profiler
+from memory_process_profiler import memory_process_profiler
 sys.dont_write_bytecode = True
 
 # Menu ANSI Colors
@@ -106,6 +107,7 @@ def display_menu():
                     break
                 if watch_list_choice == '2':
                     clear_screen()
+                    memory_process_profiler()
                     break
                 if watch_list_choice == '3':
                     break

@@ -4,7 +4,8 @@ disable=
     C0114, # missing-module-docstring
     C0116,  # missing-function-docstring
     W0141,  # In Python 2, input() can be dangerous because it evaluates Python code, thus should be blacklisted for production code. In Python 3, input() behaves like Python 2's raw_input() which can only return a string.
-    R1260 # Menu complexity is not avoidable at this time or worth fixing for this use case
+    R1260, # Menu complexity is not avoidable at this time or worth fixing for this use case
+    R0801 # By nature there will be some duplicate code because of the dynamic config generation and autonomy of configs
 
 # Specify a configuration file.
 #rcfile=

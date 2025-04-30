@@ -6,6 +6,10 @@ import subprocess
 import sys
 sys.dont_write_bytecode = True
 
+# Base Directory
+base_dir = os.path.dirname(os.path.abspath(__file__))
+os.chdir(base_dir)
+
 # Menu ANSI Colors
 BLACK = '\033[30m'
 GREEN = '\033[32m'
@@ -44,9 +48,9 @@ def write_to_file(filename, template):
     except Exception as e:
         print(f"{BLACK}{BACKGROUND_BRIGHT_MAGENTA}\nAn error occurred: {e}{RESET}")
 
-# General Process Profiler Menu
-def general_process_profiler():
-    print(f"\n{BRIGHT_GREEN}GENERAL PROCESS PROFILER SETTINGS:{RESET}")
+# Memory Process Profiler Menu
+def memory_process_profiler():
+    print(f"\n{BRIGHT_GREEN}MEMORY PROCESS PROFILER SETTINGS:{RESET}")
     filename = input(f"\n{BRIGHT_CYAN}Enter the name of the configuration file:{RESET}\n")
     sanitized_filename = filename.replace(".", "-")
     process_name = input(f"\n{BRIGHT_CYAN}Enter the process name to monitor:{RESET}\n")
@@ -56,8 +60,15 @@ def general_process_profiler():
             break
         except ValueError:
             print(f"{BLACK}{BACKGROUND_BRIGHT_MAGENTA}\nInvalid input. Please enter a number of seconds.{RESET}")
+    while True:
+        try:
+            memory_threshold = int(input(f"\n{BRIGHT_CYAN}Enter the memory threshold of the process (in MB):{RESET}\n"))
+            break
+        except ValueError:
+            print(f"{BLACK}{BACKGROUND_BRIGHT_MAGENTA}\nInvalid input. Please enter a number of Megabytes.{RESET}")
+    action = input(f"\n{BRIGHT_CYAN}Enter the action to take upon the memory threshold being met:{RESET}\n")
     template = f"""
-    # General Process Profiler
+    # Memory Process Profiler
     import os
     import sys
     import time
@@ -66,7 +77,7 @@ def general_process_profiler():
     import psutil
     import subprocess
 
-    general_process_profiler_file = (f"{{str(os.getcwd())}}/logs/{sanitized_filename}-general-profile.log")
+    memory_process_profiler_file = (f"{{str(os.getcwd())}}/logs/{sanitized_filename}-memory-profile.log")
     error_file = (f"{{str(os.getcwd())}}/logs/error.log")
 
     def find_pid_by_name(name):
@@ -94,19 +105,14 @@ def general_process_profiler():
         else:
             return ("Process N/A.")
 
-    def find_cpu_usage_by_pid(pid):
-        process = psutil.Process(pid)
-        cpu_percentage = process.cpu_percent(interval=1)
-        if cpu_percentage:
-            return cpu_percentage
-        else:
-            return ("0.0")
-
     def monitor():
         while True:
             try:
-                with open(general_process_profiler_file, "a", encoding="utf-8") as f:
-                    f.write(f"{process_name} running at local time {{time.ctime()}} PID: {{int(find_pid_by_name('{process_name}'))}}, Memory: {{find_memory_usage_by_pid(int(find_pid_by_name('{process_name}')))}}MB, CPU: {{find_cpu_usage_by_pid(int(find_pid_by_name('{process_name}')))}}%\\n")
+                process_pid = find_pid_by_name('{process_name}')
+                process_memory_set = {{find_memory_usage_by_pid(int(find_pid_by_name('{process_name}')))}}
+                process_memory = int(process_memory_set.pop())
+                if int(process_memory) >= {memory_threshold}:
+                    process_action = subprocess.run(['{action}'], capture_output=True, text=True)
                 time.sleep({interval})
             except Exception as e:
                 print(f"An error occurred in Process Watch configuration file {sanitized_filename}: {{e}}")
@@ -122,3 +128,4 @@ def general_process_profiler():
     """
     # Write the template into a config
     write_to_file(os.path.abspath(f"../watch_list/{sanitized_filename}.py"), textwrap.dedent(template))
+

@@ -10,6 +10,7 @@ sys.path.append('watch_list')
 # Logging Configuration
 os.makedirs(os.getcwd() + "/logs", exist_ok=True)
 log_file = (f"{str(os.getcwd())}/logs/process_watch.log")
+error_file = (f"{str(os.getcwd())}/logs/error.log")
 
 logging.basicConfig(
     handlers = [logging.FileHandler(log_file), logging.StreamHandler()],
@@ -27,7 +28,9 @@ def import_watch_list():
                 module_name = filename[:-3]  # Remove the .py extension
                 gbl[module_name] = importlib.import_module(f"{module_name}")
         except Exception as e:
-            logging.error("An error occurred in Process Watch: %s", e, exc_info=True)
-            raise sys.exit(1)
+            print(f"An error occurred in Process Watch: {e}")
+            with open(error_file, "a", encoding="utf-8") as file:
+                file.write(str(e) + "\n")
+                raise sys.exit(1)
 
 import_watch_list()
