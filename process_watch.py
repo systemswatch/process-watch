@@ -1,11 +1,11 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
-import os
-import logging
-import importlib
 import sys
 sys.dont_write_bytecode = True
 sys.path.append('watch_list')
+import os
+import logging
+import importlib
 
 # Logging Configuration
 os.makedirs(os.getcwd() + "/logs", exist_ok=True)

@@ -1,10 +1,8 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import os
 import textwrap
 import subprocess
-import sys
-sys.dont_write_bytecode = True
 
 # Base Directory
 base_dir = os.path.dirname(os.path.abspath(__file__))
@@ -128,4 +126,3 @@ def memory_process_profiler():
     """
     # Write the template into a config
     write_to_file(os.path.abspath(f"../watch_list/{sanitized_filename}.py"), textwrap.dedent(template))
-
