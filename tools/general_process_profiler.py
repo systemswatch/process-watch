@@ -104,7 +104,7 @@ def general_process_profiler():
         while True:
             try:
                 with open(general_process_profiler_file, "a", encoding="utf-8") as f:
-                    f.write(f"{process_name} running at local time {{time.ctime()}} PID: {{int(find_pid_by_name('{process_name}'))}}, Memory: {{find_memory_usage_by_pid(int(find_pid_by_name('{process_name}')))}}MB, CPU: {{find_cpu_usage_by_pid(int(find_pid_by_name('{process_name}')))}}%\\n")
+                    f.write(f"{{time.ctime()}} - Process: [ {process_name} ], PID: {{int(find_pid_by_name('{process_name}'))}}, Memory: {{find_memory_usage_by_pid(int(find_pid_by_name('{process_name}')))}} MB, CPU: {{find_cpu_usage_by_pid(int(find_pid_by_name('{process_name}')))}}%\\n")
                 time.sleep({interval})
             except Exception as e:
                 print(f"An error occurred in Process Watch configuration file {sanitized_filename}: {{e}}")
