@@ -110,7 +110,11 @@ def memory_process_profiler():
                 process_memory_set = {{find_memory_usage_by_pid(int(find_pid_by_name('{process_name}')))}}
                 process_memory = int(process_memory_set.pop())
                 if int(process_memory) >= {memory_threshold}:
-                    process_action = subprocess.run(['{action}'], capture_output=True, text=True)
+                    with open(memory_process_profiler_file, "a", encoding="utf-8") as f:
+                        f.write(f"{{time.ctime()}} - Memory Alert - Above Threshold {memory_threshold} MB - Process: [ {process_name} ], PID: {{int(find_pid_by_name('{process_name}'))}}, Memory: {{find_memory_usage_by_pid(int(find_pid_by_name('{process_name}')))}} MB\\n")
+                        process_action = subprocess.run(['{action}'], capture_output=True, text=True)
+                        time.sleep(5)
+                        f.write(f"{{time.ctime()}} - Memory Alert - After Remediation - Action Taken: [ {action} ], Process: [ {process_name} ], PID: {{int(find_pid_by_name('{process_name}'))}}, Memory: {{find_memory_usage_by_pid(int(find_pid_by_name('{process_name}')))}} MB\\n")
                 time.sleep({interval})
             except Exception as e:
                 print(f"An error occurred in Process Watch configuration file {sanitized_filename}: {{e}}")
