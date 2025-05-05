@@ -20,36 +20,46 @@ Python 3.11 or higher
 2. `mv process-watch /usr/local/`
 3. `cd /usr/local/process-watch`
 4. `pip install -r requirements.txt`
-5. `cd /usr/local/process-watch/systemd`
-6. `sudo cp process_watch.service /etc/systemd/system/`
-7. `sudo systemctl daemon-reload`
-8. `sudo systemctl enable process_watch`
-9. `sudo systemctl start process_watch`
+5. `/usr/local/process-watch/tools/config_tool.py`
+6. `cd /usr/local/process-watch/systemd`
+7. `sudo cp process_watch.service /etc/systemd/system/`
+8. `sudo systemctl daemon-reload`
+9. `sudo systemctl enable process_watch`
+10. `sudo systemctl start process_watch`
 
 ## CONFIGURATION
 
-Configuring Process Watch is done through the config_tool located in the tools directory. You will have several options available to you.
+Configuring Process Watch is done through a configuration tool located in the tools directory. The configuration tool will give you several options to create or manage configurations.
 
-1. `cd /usr/local/process-watch/tools`
-2. `python3 config_tool.py`
+1. `python3 /usr/local/process-watch/tools/config_tool.py`
 
-    <img src="documentation/top-menu.png" alt="Config Tool Menu" width="400" height="206">
+<img src="documentation/top-menu.png" alt="Config Tool Menu" width="400" height="206">
 
 ### Configure Process Profile Configuration
 
-1. Choose option "Create a Process Profile Configuration"
+Process profiles are the different functionalities Process Watch offers based on process utilization. Any time you make a new configuration via the configuration tool you must restart Process Watch by executing `sudo systemctl restart process_watch` for the new config to take effect.
 
-    <img src="documentation/configuration-creation.png" alt="Config Tool Menu" width="400" height="196">
+You can access the Process Profile Configuration menu from the main menu by choosing the option "Create a Process Profile Configuration".
+
+<img src="documentation/configuration-creation.png" alt="Configuration Creation Menu" width="400" height="196">
 
 ### Create General Process Profiler
 
-1. Choose option "Create General Process Profile"
+The General Process Profiler, will monitor the process you dictate and write a log entry in the logs directory under the naming convention `your-file-name-general-profile.log` at the interval you specify and show you the CPU, and Memory utilization.
 
-    <img src="documentation/general-process-profiler-settings.png" alt="Config Tool Menu" width="500" height="213">
+You can create a General Process Profiler via the Process Profile Configuration Menu by choosing the option "Create General Process Profiler".
+
+See the following example below for configuration options:
+
+<img src="documentation/general-process-profiler-settings.png" alt="General Process Profiler Settings" width="500" height="213">
 
 ### Create Memory Process Profiler
 
-1. Choose option "Create Memory Process Profile"
+The Memory Process Profiler, will monitor the memory utilization for the process you dictate and write a log entry in the logs directory under the naming convention `your-file-name-memory-profile.log` at the interval you specify when you exceed a memory threshold you define.
 
-    <img src="documentation/memory-process-profiler-settings.png" alt="Config Tool Menu" width="750" height="326">
+You can create a Memory Process Profiler via the Process Profile Configuration Menu by choosing the option "Create Memory Process Profiler".
+
+See the following example below for configuration options:
+
+<img src="documentation/memory-process-profiler-settings.png" alt="Memory Process Profiler Settings" width="750" height="326">
 
