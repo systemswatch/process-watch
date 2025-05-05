@@ -47,10 +47,10 @@ def general_process_profiler():
     print(f"\n{BRIGHT_GREEN}GENERAL PROCESS PROFILER SETTINGS:{RESET}")
     filename = input(f"\n{BRIGHT_CYAN}Enter the name of the configuration file:{RESET}\n")
     sanitized_filename = filename.replace(".", "-")
-    process_name = input(f"\n{BRIGHT_CYAN}Enter the process name to monitor:{RESET}\n")
+    process_name = input(f"\n{BRIGHT_CYAN}Enter the process name to monitor {GREEN}(use name in ps ouput){RESET}:{RESET}\n")
     while True:
         try:
-            interval = int(input(f"\n{BRIGHT_CYAN}Enter the monitoring interval in seconds:{RESET}\n"))
+            interval = int(input(f"\n{BRIGHT_CYAN}Enter the monitoring interval {GREEN}(in seconds){RESET}:{RESET}\n"))
             break
         except ValueError:
             print(f"{BLACK}{BACKGROUND_BRIGHT_MAGENTA}\nInvalid input. Please enter a number of seconds.{RESET}")
