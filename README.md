@@ -37,7 +37,7 @@ Configuring Process Watch is done through a configuration tool located in the to
 
 ### Configure Process Profile Configuration
 
-Process profiles are the different functionalities Process Watch offers based on process utilization. Any time you make a new configuration via the configuration tool you must restart Process Watch by executing `sudo systemctl restart process_watch` for the new config to take effect.
+Process profilers are the different functionalities Process Watch offers based on process utilization. Any time you make a new configuration via the configuration tool you must restart Process Watch by executing `sudo systemctl restart process_watch` for the new config to take effect.
 
 You can access the Process Profile Configuration menu from the main menu by choosing the option "Create a Process Profile Configuration".
 
@@ -45,9 +45,9 @@ You can access the Process Profile Configuration menu from the main menu by choo
 
 ### Create General Process Profiler
 
-The General Process Profiler, will monitor the process you dictate and write a log entry in the logs directory under the naming convention `your-file-name-general-profile.log` at the interval you specify and show you the CPU, and Memory utilization.
+The General Process Profiler, will monitor the process you dictate at the interval you specify and write a process specific CPU and memory utilization log entry in the logs directory under the naming convention `your-file-name-general-profile.log`.
 
-You can create a General Process Profiler via the Process Profile Configuration Menu by choosing the option "Create General Process Profiler".
+You can create a General Process Profiler via the Process Profile Configuration menu by choosing the option "Create General Process Profiler".
 
 See the following example below for configuration options:
 
@@ -55,7 +55,7 @@ See the following example below for configuration options:
 
 ### Create Memory Process Profiler
 
-The Memory Process Profiler, will monitor the memory utilization for the process you dictate and write a log entry in the logs directory under the naming convention `your-file-name-memory-profile.log` at the interval you specify when you exceed a memory threshold you define.
+The Memory Process Profiler, will monitor the memory utilization for the process you dictate at the interval you specify and write a log entry when you exceed a memory threshold you define in the logs directory under the naming convention `your-file-name-memory-profile.log`. If you choose the Memory Process Profiler also will take action when the memory threshold is exceeded. We recommend you write a shell script for the wanted action.
 
 You can create a Memory Process Profiler via the Process Profile Configuration Menu by choosing the option "Create Memory Process Profiler".
 
