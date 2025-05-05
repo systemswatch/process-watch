@@ -33,23 +33,23 @@ Configuring Process Watch is done through the config_tool located in the tools d
 1. `cd /usr/local/process-watch/tools`
 2. `python3 config_tool.py`
 
-    <img src="documentation/top-menu.png" alt="Config Tool Menu" width="275" height="175">
+    <img src="documentation/top-menu.png" alt="Config Tool Menu" width="400" height="206">
 
 ### Configure Process Profile Configuration
 
 1. Choose option "Create a Process Profile Configuration"
 
-    <img src="documentation/configuration-creation.png" alt="Config Tool Menu" width="275" height="175">
+    <img src="documentation/configuration-creation.png" alt="Config Tool Menu" width="400" height="196">
 
 ### Create General Process Profiler
 
 1. Choose option "Create General Process Profile"
 
-    <img src="documentation/general-process-profiler-settings.png" alt="Config Tool Menu" width="325" height="175">
+    <img src="documentation/general-process-profiler-settings.png" alt="Config Tool Menu" width="500" height="213">
 
 ### Create Memory Process Profiler
 
 1. Choose option "Create Memory Process Profile"
 
-    <img src="documentation/memory-process-profiler-settings.png" alt="Config Tool Menu" width="500" height="275">
+    <img src="documentation/memory-process-profiler-settings.png" alt="Config Tool Menu" width="750" height="326">
 
