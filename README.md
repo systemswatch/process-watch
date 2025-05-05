@@ -45,11 +45,11 @@ Configuring Process Watch is done through the config_tool located in the tools d
 
 1. Choose option "Create General Process Profile"
 
-    <img src="documentation/general-process-profiler-settings.png" alt="Config Tool Menu" width="325" height="175">
+    <img src="documentation/general-process-profiler-settings.png" alt="Config Tool Menu" width="350" height="175">
 
 ### Create Memory Process Profiler
 
 1. Choose option "Create Memory Process Profile"
 
-    <img src="documentation/memory-process-profiler-settings.png" alt="Config Tool Menu" width="400" height="260">
+    <img src="documentation/memory-process-profiler-settings.png" alt="Config Tool Menu" width="550" height="275">
 
