@@ -55,7 +55,7 @@ See the following example below for configuration options:
 
 ### Create Memory Process Profiler
 
-The Memory Process Profiler, will monitor the memory utilization for the process you dictate at the interval you specify and write a log entry when you exceed a memory threshold you define in the logs directory under the naming convention `your-file-name-memory-profile.log`. If you choose the Memory Process Profiler also will take action when the memory threshold is exceeded. We recommend you write a shell script for the wanted action.
+The Memory Process Profiler, will monitor the memory utilization for the process you dictate at the interval you specify and write a log entry when you exceed a memory threshold you define in the logs directory under the naming convention `your-file-name-memory-profile.log`. Memory Process Profiler can also take action when the memory threshold is exceeded. We recommend you write a shell script for the wanted action or actions upon exceeding the memory threshold.
 
 You can create a Memory Process Profiler via the Process Profile Configuration Menu by choosing the option "Create Memory Process Profiler".
 
@@ -63,3 +63,9 @@ See the following example below for configuration options:
 
 <img src="documentation/memory-process-profiler-settings.png" alt="Memory Process Profiler Settings" width="750" height="326">
 
+### Quick Notes
+
+* Logs are stored in `/usr/local/process_watch/logs`
+* Each profiler has its own log file.
+* You can modify the systemd file to use a non-root user to suit your particular needs.
+* If you need access to see the contents of Profiler Configuration files they are located at `/usr/local/process_watch/watch_list`
