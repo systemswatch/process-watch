@@ -99,12 +99,28 @@ def general_process_profiler():
             return cpu_percentage
         else:
             return ("0.0")
+    
+    def find_file_descriptor_usage_by_pid(pid):
+        process = psutil.Process(pid)
+        file_descriptor_usage_info = process.num_fds()
+        if  file_descriptor_usage_info:
+            return file_descriptor_usage_info
+        else:
+            return("0.0")
+
+    def find_thread_usage_by_pid(pid):
+        process = psutil.Process(pid)
+        thread_usage_info = process.num_threads()
+        if thread_usage_info:
+            return thread_usage_info
+        else:
+            return("0.0")
 
     def monitor():
         while True:
             try:
                 with open(general_process_profiler_file, "a", encoding="utf-8") as f:
-                    f.write(f"{{time.ctime()}} - Process: [ {process_name} ], PID: {{int(find_pid_by_name('{process_name}'))}}, Memory: {{find_memory_usage_by_pid(int(find_pid_by_name('{process_name}')))}} MB, CPU: {{find_cpu_usage_by_pid(int(find_pid_by_name('{process_name}')))}}%\\n")
+                    f.write(f"{{time.ctime()}} - Process: [ {process_name} ], PID: {{int(find_pid_by_name('{process_name}'))}}, Memory: {{find_memory_usage_by_pid(int(find_pid_by_name('{process_name}')))}} MB, CPU: {{find_cpu_usage_by_pid(int(find_pid_by_name('{process_name}')))}}%, File Descriptors: {{find_file_descriptor_usage_by_pid(int(find_pid_by_name('{process_name}')))}}, Threads: {{find_thread_usage_by_pid(int(find_pid_by_name('{process_name}')))}}\\n")
                 time.sleep({interval})
             except Exception as e:
                 print(f"An error occurred in Process Watch configuration file {sanitized_filename}: {{e}}")
