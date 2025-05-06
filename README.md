@@ -45,7 +45,7 @@ You can access the Process Profile Configuration menu from the main menu by choo
 
 ### Create General Process Profiler
 
-The General Process Profiler, will monitor the process you dictate at the interval you specify and write a process specific CPU and memory utilization log entry in the logs directory under the naming convention `your-file-name-general-profile.log`.
+The General Process Profiler, will monitor the process you dictate at the interval you specify and write CPU, RSS memory usage, file descriptor, and thread count log entry in the logs directory under the naming convention `your-file-name-general-profile.log`.
 
 You can create a General Process Profiler via the Process Profile Configuration menu by choosing the option "Create General Process Profiler".
 
