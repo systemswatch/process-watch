@@ -67,5 +67,5 @@ See the following example below for configuration options:
 
 * Logs are stored in `/usr/local/process_watch/logs`
 * Each profiler has its own log file.
-* You can modify the systemd file to use a non-root user to suit your particular needs.
-* If you need access to see the contents of Profiler Configuration files they are located at `/usr/local/process_watch/watch_list`
+* If you need to run Process Watch as a non-root user simply modify the systemd file swapping root for your user.
+* If you need access to see the contents of individual Profiler Configuration files they are located at `/usr/local/process_watch/watch_list` under the configuration file name you provided upon creation.
