@@ -2,7 +2,6 @@
 
 import os
 import textwrap
-import subprocess
 
 # Base Directory
 base_dir = os.path.dirname(os.path.abspath(__file__))
@@ -20,21 +19,6 @@ RESET = '\033[0m'
 # Reset Screen
 def clear_screen():
     os.system('cls' if os.name == 'nt' else 'clear')
-
-# Identify Process By Name Return PID
-def find_pid_by_name(name):
-    try:
-        with subprocess.Popen(['pgrep', '-f', name], shell=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True) as all_pids:
-            output, errors = all_pids.communicate()
-            if errors:
-                print(f"Errors:\n{errors.decode()}")
-                return None
-            all_pids_array = output.strip().split("\n")
-            first_pid = all_pids_array[0]
-            return first_pid
-    except Exception as e:
-        print(f"{BLACK}{BACKGROUND_BRIGHT_MAGENTA}\nAn error occurred: {e}{RESET}")
-        return None
 
 # Write configuration file to watch_list directory
 def write_to_file(filename, template):
@@ -81,7 +65,7 @@ def file_descriptor_process_profiler():
 
     def find_pid_by_name(name):
         try:
-            with subprocess.Popen(['pgrep', '-f', name], shell=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True) as all_pids:
+            with subprocess.Popen(['pgrep', '-xf', name], shell=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True) as all_pids:
                 output, errors = all_pids.communicate()
                 if errors:
                     logging.error(f"Errors:\\n{{errors.decode()}}")

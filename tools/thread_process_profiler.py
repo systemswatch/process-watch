@@ -3,6 +3,10 @@
 import os
 import textwrap
 
+# Base Directory
+base_dir = os.path.dirname(os.path.abspath(__file__))
+os.chdir(base_dir)
+
 # Menu ANSI Colors
 BLACK = '\033[30m'
 GREEN = '\033[32m'
@@ -26,9 +30,9 @@ def write_to_file(filename, template):
     except Exception as e:
         print(f"{BLACK}{BACKGROUND_BRIGHT_MAGENTA}\nAn error occurred: {e}{RESET}")
 
-# General Process Profiler Menu
-def general_process_profiler():
-    print(f"\n{BRIGHT_GREEN}GENERAL PROCESS PROFILER SETTINGS:{RESET}")
+# Thread Process Profiler Menu
+def thread_process_profiler():
+    print(f"\n{BRIGHT_GREEN}THREAD PROCESS PROFILER SETTINGS:{RESET}")
     filename = input(f"\n{BRIGHT_CYAN}Enter the name of the configuration file:{RESET}\n")
     sanitized_filename = filename.replace(".", "-")
     process_name = input(f"\n{BRIGHT_CYAN}Enter the process name to monitor {GREEN}(use name in ps ouput){RESET}:{RESET}\n")
@@ -38,8 +42,16 @@ def general_process_profiler():
             break
         except ValueError:
             print(f"{BLACK}{BACKGROUND_BRIGHT_MAGENTA}\nInvalid input. Please enter a number of seconds.{RESET}")
+    while True:
+        try:
+            thread_threshold = int(input(f"\n{BRIGHT_CYAN}Enter the thread threshold of the process:{RESET}\n"))
+            break
+        except ValueError:
+            print(f"{BLACK}{BACKGROUND_BRIGHT_MAGENTA}\nInvalid input. Please enter the number of threads.{RESET}")
+    action = input(f"\n{BRIGHT_CYAN}Enter the action to take upon the thread threshold being met {GREEN}(leave blank for no action){RESET}:{RESET}\n") or "echo"
+
     template = f"""
-    # General Process Profiler
+    #Thread Process Profiler
     import os
     import sys
     import time
@@ -48,7 +60,7 @@ def general_process_profiler():
     import psutil
     import subprocess
 
-    general_process_profiler_file = (f"{{str(os.getcwd())}}/logs/{sanitized_filename}-gen-profiler.log")
+    thread_process_profiler_file = (f"{{str(os.getcwd())}}/logs/{sanitized_filename}-thrd-profiler.log")
     error_file = (f"{{str(os.getcwd())}}/logs/error.log")
 
     def find_pid_by_name(name):
@@ -66,32 +78,6 @@ def general_process_profiler():
             raise sys.exit(1)
             return None
 
-    def find_memory_usage_by_pid(pid):
-        process = psutil.Process(pid)
-        memory_info = process.memory_info()
-        rss_bytes = memory_info.rss
-        rss_megabytes = int(rss_bytes / (1024 * 1024))
-        if rss_megabytes:
-            return rss_megabytes
-        else:
-            return ("Process N/A.")
-
-    def find_cpu_usage_by_pid(pid):
-        process = psutil.Process(pid)
-        cpu_percentage = process.cpu_percent(interval=1)
-        if cpu_percentage:
-            return cpu_percentage
-        else:
-            return ("0.0")
-    
-    def find_file_descriptor_usage_by_pid(pid):
-        process = psutil.Process(pid)
-        file_descriptor_usage_info = process.num_fds()
-        if  file_descriptor_usage_info:
-            return file_descriptor_usage_info
-        else:
-            return("0.0")
-
     def find_thread_usage_by_pid(pid):
         process = psutil.Process(pid)
         thread_usage_info = process.num_threads()
@@ -103,8 +89,15 @@ def general_process_profiler():
     def monitor():
         while True:
             try:
-                with open(general_process_profiler_file, "a", encoding="utf-8") as f:
-                    f.write(f"{{time.ctime()}} - Process: [ {process_name} ], PID: {{int(find_pid_by_name('{process_name}'))}}, Memory: {{find_memory_usage_by_pid(int(find_pid_by_name('{process_name}')))}} MB, CPU: {{find_cpu_usage_by_pid(int(find_pid_by_name('{process_name}')))}}%, File Descriptors: {{find_file_descriptor_usage_by_pid(int(find_pid_by_name('{process_name}')))}}, Threads: {{find_thread_usage_by_pid(int(find_pid_by_name('{process_name}')))}}\\n")
+                process_pid = find_pid_by_name('{process_name}')
+                process_thread_set = {{find_thread_usage_by_pid(int(find_pid_by_name('{process_name}')))}}
+                process_thread = int(process_thread_set.pop())
+                if int(process_thread) >= {thread_threshold}:
+                    with open(thread_process_profiler_file, "a", encoding="utf-8") as f:
+                        f.write(f"{{time.ctime()}} - Thread Alert - Above Threshold {thread_threshold} - Process: [ {process_name} ], PID: {{int(find_pid_by_name('{process_name}'))}}, Threads: {{find_thread_usage_by_pid(int(find_pid_by_name('{process_name}')))}}\\n")
+                        process_action = subprocess.run(['{action}'], capture_output=True, text=True)
+                        time.sleep(5)
+                        f.write(f"{{time.ctime()}} - Thread Alert - After Remediation - Action Taken: [ {action} ], Process: [ {process_name} ], PID: {{int(find_pid_by_name('{process_name}'))}}, Threads: {{find_thread_usage_by_pid(int(find_pid_by_name('{process_name}')))}}\\n")
                 time.sleep({interval})
             except Exception as e:
                 print(f"An error occurred in Process Watch configuration file {sanitized_filename}: {{e}}")
@@ -119,4 +112,4 @@ def general_process_profiler():
     worker()
     """
     # Write the template into a config
-    write_to_file(os.path.abspath(f"../watch_list/{sanitized_filename}_gen.py"), textwrap.dedent(template))
+    write_to_file(os.path.abspath(f"../watch_list/{sanitized_filename}_thrd.py"), textwrap.dedent(template))
