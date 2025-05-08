@@ -64,7 +64,7 @@ def general_process_profiler():
     import psutil
     import subprocess
 
-    general_process_profiler_file = (f"{{str(os.getcwd())}}/logs/{sanitized_filename}-general-profile.log")
+    general_process_profiler_file = (f"{{str(os.getcwd())}}/logs/{sanitized_filename}-gen-profiler.log")
     error_file = (f"{{str(os.getcwd())}}/logs/error.log")
 
     def find_pid_by_name(name):
@@ -135,4 +135,4 @@ def general_process_profiler():
     worker()
     """
     # Write the template into a config
-    write_to_file(os.path.abspath(f"../watch_list/{sanitized_filename}.py"), textwrap.dedent(template))
+    write_to_file(os.path.abspath(f"../watch_list/{sanitized_filename}_gen.py"), textwrap.dedent(template))

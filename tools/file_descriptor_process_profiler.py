@@ -46,9 +46,9 @@ def write_to_file(filename, template):
     except Exception as e:
         print(f"{BLACK}{BACKGROUND_BRIGHT_MAGENTA}\nAn error occurred: {e}{RESET}")
 
-# Memory Process Profiler Menu
-def memory_process_profiler():
-    print(f"\n{BRIGHT_GREEN}MEMORY PROCESS PROFILER SETTINGS:{RESET}")
+# File Descriptor Process Profiler Menu
+def file_descriptor_process_profiler():
+    print(f"\n{BRIGHT_GREEN}FILE DESCRIPTOR PROCESS PROFILER SETTINGS:{RESET}")
     filename = input(f"\n{BRIGHT_CYAN}Enter the name of the configuration file:{RESET}\n")
     sanitized_filename = filename.replace(".", "-")
     process_name = input(f"\n{BRIGHT_CYAN}Enter the process name to monitor {GREEN}(use name in ps ouput){RESET}:{RESET}\n")
@@ -60,14 +60,14 @@ def memory_process_profiler():
             print(f"{BLACK}{BACKGROUND_BRIGHT_MAGENTA}\nInvalid input. Please enter a number of seconds.{RESET}")
     while True:
         try:
-            memory_threshold = int(input(f"\n{BRIGHT_CYAN}Enter the memory threshold of the process {GREEN}(in MB){RESET}:{RESET}\n"))
+            file_descriptor_threshold = int(input(f"\n{BRIGHT_CYAN}Enter the file descriptor threshold of the process:{RESET}\n"))
             break
         except ValueError:
-            print(f"{BLACK}{BACKGROUND_BRIGHT_MAGENTA}\nInvalid input. Please enter a number of Megabytes.{RESET}")
-    action = input(f"\n{BRIGHT_CYAN}Enter the action to take upon the memory threshold being met {GREEN}(leave blank for no action){RESET}:{RESET}\n") or "echo"
+            print(f"{BLACK}{BACKGROUND_BRIGHT_MAGENTA}\nInvalid input. Please enter the number of file descriptors.{RESET}")
+    action = input(f"\n{BRIGHT_CYAN}Enter the action to take upon the file descriptor threshold being met {GREEN}(leave blank for no action){RESET}:{RESET}\n") or "echo"
 
     template = f"""
-    # Memory Process Profiler
+    # File Descriptor Process Profiler
     import os
     import sys
     import time
@@ -76,7 +76,7 @@ def memory_process_profiler():
     import psutil
     import subprocess
 
-    memory_process_profiler_file = (f"{{str(os.getcwd())}}/logs/{sanitized_filename}-mem-profiler.log")
+    file_descriptor_process_profiler_file = (f"{{str(os.getcwd())}}/logs/{sanitized_filename}-fds-profiler.log")
     error_file = (f"{{str(os.getcwd())}}/logs/error.log")
 
     def find_pid_by_name(name):
@@ -94,28 +94,26 @@ def memory_process_profiler():
             raise sys.exit(1)
             return None
 
-    def find_memory_usage_by_pid(pid):
+    def find_file_descriptor_usage_by_pid(pid):
         process = psutil.Process(pid)
-        memory_info = process.memory_info()
-        rss_bytes = memory_info.rss
-        rss_megabytes = int(rss_bytes / (1024 * 1024))
-        if rss_megabytes:
-            return rss_megabytes
+        file_descriptor_usage_info = process.num_fds()
+        if  file_descriptor_usage_info:
+            return file_descriptor_usage_info
         else:
-            return ("Process N/A.")
+            return("0.0")
 
     def monitor():
         while True:
             try:
                 process_pid = find_pid_by_name('{process_name}')
-                process_memory_set = {{find_memory_usage_by_pid(int(find_pid_by_name('{process_name}')))}}
-                process_memory = int(process_memory_set.pop())
-                if int(process_memory) >= {memory_threshold}:
-                    with open(memory_process_profiler_file, "a", encoding="utf-8") as f:
-                        f.write(f"{{time.ctime()}} - Memory Alert - Above Threshold {memory_threshold} MB - Process: [ {process_name} ], PID: {{int(find_pid_by_name('{process_name}'))}}, Memory: {{find_memory_usage_by_pid(int(find_pid_by_name('{process_name}')))}} MB\\n")
+                process_file_descriptor_set = {{find_file_descriptor_usage_by_pid(int(find_pid_by_name('{process_name}')))}}
+                process_file_descriptor = int(process_file_descriptor_set.pop())
+                if int(process_file_descriptor) >= {file_descriptor_threshold}:
+                    with open(file_descriptor_process_profiler_file, "a", encoding="utf-8") as f:
+                        f.write(f"{{time.ctime()}} - File Descriptor Alert - Above Threshold {file_descriptor_threshold} - Process: [ {process_name} ], PID: {{int(find_pid_by_name('{process_name}'))}}, File Descriptors: {{find_file_descriptor_usage_by_pid(int(find_pid_by_name('{process_name}')))}}\\n")
                         process_action = subprocess.run(['{action}'], capture_output=True, text=True)
                         time.sleep(5)
-                        f.write(f"{{time.ctime()}} - Memory Alert - After Remediation - Action Taken: [ {action} ], Process: [ {process_name} ], PID: {{int(find_pid_by_name('{process_name}'))}}, Memory: {{find_memory_usage_by_pid(int(find_pid_by_name('{process_name}')))}} MB\\n")
+                        f.write(f"{{time.ctime()}} - File Descriptor Alert - After Remediation - Action Taken: [ {action} ], Process: [ {process_name} ], PID: {{int(find_pid_by_name('{process_name}'))}}, File Descriptors: {{find_file_descriptor_usage_by_pid(int(find_pid_by_name('{process_name}')))}}\\n")
                 time.sleep({interval})
             except Exception as e:
                 print(f"An error occurred in Process Watch configuration file {sanitized_filename}: {{e}}")
@@ -130,4 +128,4 @@ def memory_process_profiler():
     worker()
     """
     # Write the template into a config
-    write_to_file(os.path.abspath(f"../watch_list/{sanitized_filename}_mem.py"), textwrap.dedent(template))
+    write_to_file(os.path.abspath(f"../watch_list/{sanitized_filename}_fds.py"), textwrap.dedent(template))
