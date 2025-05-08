@@ -2,7 +2,6 @@
 
 import os
 import textwrap
-import subprocess
 
 # Menu ANSI Colors
 BLACK = '\033[30m'
