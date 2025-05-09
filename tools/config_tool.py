@@ -7,6 +7,7 @@ from general_process_profiler import general_process_profiler
 from memory_process_profiler import memory_process_profiler
 from file_descriptor_process_profiler import file_descriptor_process_profiler
 from thread_process_profiler import thread_process_profiler
+from global_system_processes_profiler import global_system_processes_profiler
 
 # Menu ANSI Colors
 BLACK = '\033[30m'
@@ -102,8 +103,9 @@ def display_menu():
                 print("1. Create General Process Profiler")
                 print("2. Create Memory Process Profiler")
                 print("3. Create File Descriptor Profiler")
-                print("4. Create Thread Descriptor Profiler")
-                print("5. Exit")
+                print("4. Create Thread Profiler")
+                print("5. Create Global System Processes Profiler")
+                print("6. Exit")
                 watch_list_choice = input(f"\n{BRIGHT_CYAN}Enter your choice (1-5):{RESET}\n")
                 if watch_list_choice == '1':
                     clear_screen()
@@ -122,6 +124,10 @@ def display_menu():
                     thread_process_profiler()
                     break
                 if watch_list_choice == '5':
+                    clear_screen()
+                    global_system_processes_profiler()
+                    break
+                if watch_list_choice == '6':
                     break
                 print(f"\n{BLACK}{BACKGROUND_BRIGHT_MAGENTA}Invalid choice. Please try again.{RESET}")                  
         elif top_choice == '4':
