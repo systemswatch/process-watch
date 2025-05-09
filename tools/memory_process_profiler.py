@@ -32,7 +32,7 @@ def write_to_file(filename, template):
 
 # Memory Process Profiler Menu
 def memory_process_profiler():
-    print(f"\n{BRIGHT_GREEN}MEMORY PROCESS PROFILER SETTINGS:{RESET}")
+    print(f"\n{BRIGHT_GREEN}MEMORY (RSS) PROCESS PROFILER SETTINGS:{RESET}")
     filename = input(f"\n{BRIGHT_CYAN}Enter the name of the configuration file:{RESET}\n")
     sanitized_filename = filename.replace(".", "-")
     process_name = input(f"\n{BRIGHT_CYAN}Enter the process name to monitor {GREEN}(use name in ps ouput){RESET}:{RESET}\n")
@@ -51,7 +51,7 @@ def memory_process_profiler():
     action = input(f"\n{BRIGHT_CYAN}Enter the action to take upon the memory threshold being met {GREEN}(leave blank for no action){RESET}:{RESET}\n") or "echo"
 
     template = f"""
-    # Memory Process Profiler
+    # Memory (RSS) Process Profiler
     import os
     import sys
     import time
@@ -96,10 +96,10 @@ def memory_process_profiler():
                 process_memory = int(process_memory_set.pop())
                 if int(process_memory) >= {memory_threshold}:
                     with open(memory_process_profiler_file, "a", encoding="utf-8") as f:
-                        f.write(f"{{time.ctime()}} - Memory Alert - Above Threshold {memory_threshold} MB - Process: [ {process_name} ], PID: {{int(find_pid_by_name('{process_name}'))}}, Memory: {{find_memory_usage_by_pid(int(find_pid_by_name('{process_name}')))}} MB\\n")
+                        f.write(f"{{time.ctime()}} - Memory (RSS) Alert - Above Threshold {memory_threshold} MB - Process: [ {process_name} ], PID: {{int(find_pid_by_name('{process_name}'))}}, Memory: {{find_memory_usage_by_pid(int(find_pid_by_name('{process_name}')))}} MB\\n")
                         process_action = subprocess.run(['{action}'], capture_output=True, text=True)
                         time.sleep(5)
-                        f.write(f"{{time.ctime()}} - Memory Alert - After Remediation - Action Taken: [ {action} ], Process: [ {process_name} ], PID: {{int(find_pid_by_name('{process_name}'))}}, Memory: {{find_memory_usage_by_pid(int(find_pid_by_name('{process_name}')))}} MB\\n")
+                        f.write(f"{{time.ctime()}} - Memory (RSS) Alert - After Remediation - Action Taken: [ {action} ], Process: [ {process_name} ], PID: {{int(find_pid_by_name('{process_name}'))}}, Memory: {{find_memory_usage_by_pid(int(find_pid_by_name('{process_name}')))}} MB\\n")
                 time.sleep({interval})
             except Exception as e:
                 print(f"An error occurred in Process Watch configuration file {sanitized_filename}: {{e}}")
