@@ -102,8 +102,8 @@ def display_menu():
                 print(f"\n{BRIGHT_GREEN}PROCESS WATCH CONFIGURATION CREATION OPTIONS{RESET}\n")
                 print("1. Create General Process Profiler")
                 print("2. Create Memory Process Profiler")
-                print("3. Create File Descriptor Profiler")
-                print("4. Create Thread Profiler")
+                print("3. Create Thread Process Profiler")
+                print("4. Create File Descriptor Process Profiler")
                 print("5. Create Global System Processes Profiler")
                 print("6. Exit")
                 watch_list_choice = input(f"\n{BRIGHT_CYAN}Enter your choice (1-5):{RESET}\n")
@@ -117,11 +117,11 @@ def display_menu():
                     break
                 if watch_list_choice == '3':
                     clear_screen()
-                    file_descriptor_process_profiler()
+                    thread_process_profiler()
                     break
                 if watch_list_choice == '4':
                     clear_screen()
-                    thread_process_profiler()
+                    file_descriptor_process_profiler()
                     break
                 if watch_list_choice == '5':
                     clear_screen()
