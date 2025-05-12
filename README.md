@@ -9,6 +9,8 @@ Process Watch monitors processes in your Linux or macOS system for anomalies or 
 
 This is useful for systems issues, automating troubleshooting, provisioning, scaling, and much more.
 
+The Open Source version of Process Watch is meant to be managed manually or with a provisioning or configuration management tool. There are plans for a single pane of glass dashboard for easier visibility. 
+
 ## PREREQUISITES
 * Ubuntu 20.04+
 * macOS 15.4.1
