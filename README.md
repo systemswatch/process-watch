@@ -33,7 +33,7 @@ Configuring Process Watch is done through a configuration tool located in the to
 
 1. `python3 /usr/local/process-watch/tools/config_tool.py`
 
-<img src="documentation/top-menu.png" alt="Config Tool Menu" width="400" height="206">
+<img src="documentation/config-tool-menu.png" alt="Config Tool Menu" width="400" height="213">
 
 ### Configure Process Profile Configuration
 
@@ -41,27 +41,37 @@ Process profilers are the different functionalities Process Watch offers based o
 
 You can access the Process Profile Configuration menu from the main menu by choosing the option "Create a Process Profile Configuration".
 
-<img src="documentation/configuration-creation.png" alt="Configuration Creation Menu" width="400" height="196">
+<img src="documentation/configuration-creation-sub-menu.png" alt="Configuration Creation Menu" width="400" height="245">
 
 ### Create General Process Profiler
 
-The General Process Profiler, will monitor the process you dictate at the interval you specify and write CPU, RSS memory usage, file descriptor, and thread count log entry in the logs directory under the naming convention `your-file-name-general-profile.log`.
+The General Process Profiler, will monitor the process you dictate at the interval you specify and write CPU, RSS memory usage, file descriptor, and thread count log entry in the logs directory under the naming convention `your-file-name-gen-profiler.log`.
 
 You can create a General Process Profiler via the Process Profile Configuration menu by choosing the option "Create General Process Profiler".
 
 See the following example below for configuration options:
 
-<img src="documentation/general-process-profiler-settings.png" alt="General Process Profiler Settings" width="500" height="213">
+<img src="documentation/general-process-profiler-settings.png" alt="General Process Profiler Settings" width="500" height="223">
 
 ### Create Memory Process Profiler
 
-The Memory Process Profiler, will monitor the memory utilization for the process you dictate at the interval you specify and write a log entry when you exceed a memory threshold you define in the logs directory under the naming convention `your-file-name-memory-profile.log`. Memory Process Profiler can also take action when the memory threshold is exceeded. We recommend you write a shell script for the wanted action or actions upon exceeding the memory threshold.
+The Memory Process Profiler, will monitor the memory utilization for the process you dictate at the interval you specify and write a log entry when you exceed a memory threshold you define in the logs directory under the naming convention `your-file-name-mem-profiler.log`. Memory Process Profiler can also take action when the memory threshold is exceeded. We recommend you write a shell script for the wanted action or actions upon exceeding the memory threshold.
 
 You can create a Memory Process Profiler via the Process Profile Configuration Menu by choosing the option "Create Memory Process Profiler".
 
 See the following example below for configuration options:
 
-<img src="documentation/memory-process-profiler-settings.png" alt="Memory Process Profiler Settings" width="750" height="326">
+<img src="documentation/memory-process-profiler-settings.png" alt="Memory Process Profiler Settings" width="750" height="334">
+
+### Create File Descriptor Process Profiler
+
+The File Descriptor Process Profiler, will monitor the file descriptor utilization for the process you dictate at the interval you specify and write a log entry when you exceed a file descriptor threshold you define in the logs directory under the naming convention `your-file-name-fds-profiler.log`. File Descriptor Process Profiler can also take action when the file descriptor threshold is exceeded. We recommend you write a shell script for the wanted action or actions upon exceeding the file descriptor threshold.
+
+You can create a File Descriptor Process Profiler via the Process Profile Configuration Menu by choosing the option "Create File Descriptor Process Profiler".
+
+See the following example below for configuration options:
+
+<img src="documentation/memory-process-profiler-settings.png" alt="Memory Process Profiler Settings" width="750" height="334">
 
 ### Quick Notes
 
