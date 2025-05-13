@@ -65,10 +65,10 @@ def global_system_processes_profiler():
             except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
                 pass
 
-        top_threads = sorted(processes, key=lambda p: p['num_threads'], reverse=True)[:num_top]
-        top_fds = sorted(processes, key=lambda p: p['num_fds'], reverse=True)[:num_top]
-        top_memory = sorted(processes, key=lambda p: p['memory_info'].rss, reverse=True)[:num_top]
-        top_cpu = sorted(processes, key=lambda p: p['cpu_percent'], reverse=True)[:num_top]
+        top_threads = sorted(processes, key=lambda p: p['num_threads'] if p['num_threads'] is not None else 0, reverse=True)[:num_top]
+        top_fds = sorted(processes, key=lambda p: p['num_fds'] if p['num_threads'] is not None else 0, reverse=True)[:num_top]
+        top_memory = sorted(processes, key=lambda p: p['memory_info'].rss if p['num_threads'] is not None else 0, reverse=True)[:num_top]
+        top_cpu = sorted(processes, key=lambda p: p['cpu_percent'] if p['num_threads'] is not None else 0, reverse=True)[:num_top]
 
         return top_threads, top_fds, top_memory, top_cpu
 
