@@ -3,8 +3,8 @@ Description=Process Monitoring and Management
 After=network.target
  
 [Service]
-User=root
-Group=root
+User=YOURUSERHERE
+Group=YOURUSERHERE
 WorkingDirectory=/usr/local/process_watch
 ExecStart=/usr/bin/python3 /usr/local/process_watch/process_watch.py
  

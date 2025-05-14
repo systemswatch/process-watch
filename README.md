@@ -5,16 +5,16 @@
     * The author or owner of this repository is not liable for damages or losses arising from your use or inability to use the code.
 
 ## DESCRIPTION
-Process Watch monitors processes in your Linux or macOS system for anomalies or situations which when arise trigger predetermined actions you designate.
+Process Watch monitors individual processes in your Linux or macOS system for metrics such as CPU, Memory, Threads, File Descriptors. You can set a predetermined action of your choosing when a threshold is met.
 
-This is useful for systems issues, automating troubleshooting, provisioning, scaling, and much more.
+Process Watch is useful for diagnosing systems issues caused by specific processes, automating troubleshooting, triggering scaling, and much more.
 
-The Open Source version of Process Watch is meant to be managed manually or with a provisioning or configuration management tool. There are plans for a single pane of glass dashboard for easier visibility. 
+The Open Source version of Process Watch is meant to be managed manually or with a provisioning or configuration management tool. There are plans for a single pane of glass dashboard for easier visibility.
 
 ## PREREQUISITES
-* Ubuntu 20.04+
-* macOS 15.4.1
-* Python 3.11 or higher
+* Ubuntu 20.04 or higher
+* macOS 15.4.1 or higher
+* Python 3.10.9 or higher
 
 ## INSTALLATION
 
@@ -27,6 +27,7 @@ The Open Source version of Process Watch is meant to be managed manually or with
 5. `/usr/local/process-watch/tools/config_tool.py`
 6. `cd /usr/local/process-watch/systemd`
 7. `sudo cp process_watch.service /etc/systemd/system/`
+   * (Make sure to edit the process_watch.service file with your chosen user and group)
 8. `sudo systemctl daemon-reload`
 9. `sudo systemctl enable process_watch`
 10. `sudo systemctl start process_watch`
@@ -61,6 +62,10 @@ See the following example below for configuration options:
 
 The Memory Process Profiler, will monitor the memory utilization for the process you dictate at the interval you specify and write a log entry when you exceed a memory threshold you define in the logs directory under the naming convention `your-file-name-mem-profiler.log`. Memory Process Profiler can also take action when the memory threshold is exceeded. We recommend you write a shell script for the wanted action or actions upon exceeding the memory threshold.
 
+**Actions**
+
+If you choose to have an action triggered we recommend you write a shell script for the action and put it in the actions directory. The shell script can be bash or language of your choosing as long as its executable and can be called by its path (ex. `/usr/local/process-watch/actions/action.sh`), also ensure the script has an interpreter defined (ex. `#!/bin/bash`). Example actions could be restarting the process, collecting troubleshooting info, notification or anything you need during when the threshold is met.
+
 You can create a Memory Process Profiler via the Process Profiler Configuration Menu by choosing the option "Create Memory Process Profiler".
 
 See the following example below for configuration options:
@@ -71,6 +76,10 @@ See the following example below for configuration options:
 
 The Thread Process Profiler, will monitor the thread utilization for the process you dictate at the interval you specify and write a log entry when you exceed a thread threshold you define in the logs directory under the naming convention `your-file-name-thrd-profiler.log`. Thread Process Profiler can also take action when the thread threshold is exceeded. We recommend you write a shell script for the wanted action or actions upon exceeding the thread threshold.
 
+**Actions**
+
+If you choose to have an action triggered we recommend you write a shell script for the action and put it in the actions directory. The shell script can be bash or language of your choosing as long as its executable and can be called by its path (ex. `/usr/local/process-watch/actions/action.sh`), also ensure the script has an interpreter defined (ex. `#!/bin/bash`). Example actions could be restarting the process, collecting troubleshooting info, notification or anything you need during when the threshold is met.
+
 You can create a Thread Process Profiler via the Process Profiler Configuration Menu by choosing the option "Create Thread Process Profiler".
 
 See the following example below for configuration options:
@@ -80,6 +89,10 @@ See the following example below for configuration options:
 ### Create File Descriptor Process Profiler
 
 The File Descriptor Process Profiler, will monitor the file descriptor utilization for the process you dictate at the interval you specify and write a log entry when you exceed a file descriptor threshold you define in the logs directory under the naming convention `your-file-name-fds-profiler.log`. File Descriptor Process Profiler can also take action when the file descriptor threshold is exceeded. We recommend you write a shell script for the wanted action or actions upon exceeding the file descriptor threshold.
+
+**Actions**
+
+If you choose to have an action triggered we recommend you write a shell script for the action and put it in the actions directory. The shell script can be bash or language of your choosing as long as its executable and can be called by its path (ex. `/usr/local/process-watch/actions/action.sh`), also ensure the script has an interpreter defined (ex. `#!/bin/bash`). Example actions could be restarting the process, collecting troubleshooting info, notification or anything you need during when the threshold is met.
 
 You can create a File Descriptor Process Profiler via the Process Profiler Configuration Menu by choosing the option "Create File Descriptor Process Profiler".
 
@@ -97,11 +110,11 @@ See the following example below for configuration options:
 
 <img src="documentation/global-system-processess-profiler-settings.png" alt="Global System Processes Profiler Settings" width="600" height="112">
 
+
 ### Quick Notes
 
+* If you are using systemd and the supplied `process_watch.service` file make sure to change the user and group to your choosing.
 * Logs are stored in `/usr/local/process_watch/logs`
 * Each profiler has its own log file.
-* If you need to run Process Watch as a non-root user simply modify the systemd file swapping root for your user.
-* If you need to run your Process Watch action as a non-root user enable it via sudo in your action shell script.
 * If you need access to see the contents of individual Profiler Configuration files they are located at `/usr/local/process_watch/watch_list` under the configuration file name you provided upon creation.
-* We are still looking at how to take action on a process CPU utilization since often times it will spike to 100% however that doesn't mean it needs action taken.
+* CPU actions are not their yet because we are still looking at the proper situation to take action on a process CPU utilization since often times it will spike to 100% however that doesn't mean a process needs action taken.
