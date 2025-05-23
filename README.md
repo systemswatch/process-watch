@@ -37,7 +37,7 @@ Configuring Process Watch is done through a command line configuration tool loca
 
 `python3 /usr/local/process-watch/tools/config_tool.py`
 
-<img src="documentation/config-tool-menu.png" alt="Config Tool Menu" width="400" height="213">
+<img src="documentation/config-tool-menu.png" alt="Config Tool Menu">
 
 ### Configure Process Profiler Configuration
 
@@ -45,7 +45,7 @@ Process profilers are the different functionalities Process Watch offers based o
 
 You can access the Process Profiler Configuration menu from the main menu by choosing the option "Create a Process Profiler Configuration".
 
-<img src="documentation/configuration-creation-sub-menu.png" alt="Configuration Creation Menu" width="400" height="244">
+<img src="documentation/configuration-creation-sub-menu.png" alt="Configuration Creation Menu">
 
 ### Create General Process Profiler
 
@@ -55,7 +55,7 @@ You can create a General Process Profiler via the Process Profiler Configuration
 
 See the following example below for configuration options:
 
-<img src="documentation/general-process-profiler-settings.png" alt="General Process Profiler Settings" width="500" height="223">
+<img src="documentation/general-process-profiler-settings.png" alt="General Process Profiler Settings">
 
 ### Create Memory Process Profiler
 
@@ -69,7 +69,7 @@ You can create a Memory Process Profiler via the Process Profiler Configuration 
 
 See the following example below for configuration options:
 
-<img src="documentation/memory-process-profiler-settings.png" alt="Memory Process Profiler Settings" width="750" height="334">
+<img src="documentation/memory-process-profiler-settings.png" alt="Memory Process Profiler Settings">
 
 ### Create Thread Process Profiler
 
@@ -83,7 +83,7 @@ You can create a Thread Process Profiler via the Process Profiler Configuration 
 
 See the following example below for configuration options:
 
-<img src="documentation/thread-process-profiler-settings.png" alt="Thread Process Profiler Settings" width="750" height="329">
+<img src="documentation/thread-process-profiler-settings.png" alt="Thread Process Profiler Settings">
 
 ### Create File Descriptor Process Profiler
 
@@ -97,7 +97,7 @@ You can create a File Descriptor Process Profiler via the Process Profiler Confi
 
 See the following example below for configuration options:
 
-<img src="documentation/file-descriptor-process-profiler-settings.png" alt="File Descriptor Process Profiler Settings" width="750" height="301">
+<img src="documentation/file-descriptor-process-profiler-settings.png" alt="File Descriptor Process Profiler Settings">
 
 ### Create Global System Processes Profiler
 
@@ -107,7 +107,7 @@ You can create a File Descriptor Process Profiler via the Process Profiler Confi
 
 See the following example below for configuration options:
 
-<img src="documentation/global-system-processess-profiler-settings.png" alt="Global System Processes Profiler Settings" width="600" height="112">
+<img src="documentation/global-system-processess-profiler-settings.png" alt="Global System Processes Profiler Settings">
 
 
 ### Quick Notes
