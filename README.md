@@ -2,19 +2,18 @@
 
 # PROCESS WATCH
 * License: (Apache 2.0), Copyright (C) 2025, Author Phil Chen
-    * The author or owner of this repository is not liable for damages or losses arising from your use or inability to use the code.
+    * The author or owner of this repository is not liable for damages or losses arising from your use or inability to use the repository/code.
 
 ## DESCRIPTION
 Process Watch monitors individual processes in your Linux or macOS system for metrics such as CPU, Memory, Threads, File Descriptors. You can set a predetermined action of your choosing when a threshold is met.
 
 Process Watch is useful for diagnosing systems issues caused by specific processes, automating troubleshooting, triggering scaling, and much more.
 
-The Open Source version of Process Watch is meant to be managed manually or with a provisioning or configuration management tool. There are plans for a single pane of glass dashboard for easier visibility.
+The Open Source version of Process Watch is meant to be managed manually or with a provisioning/configuration management tool. There are future plans for a single pane of glass dashboard for easier visibility.
 
 ## PREREQUISITES
-* Ubuntu 20.04 or higher
-* macOS 15.4.1 or higher
-* Python 3.10.9 or higher
+* Operating Systems: Ubuntu 20.04+, macOS 15.4.1+
+* Python 3.10.9+ and pip 22.3.1+
 
 ## INSTALLATION
 
@@ -34,7 +33,7 @@ The Open Source version of Process Watch is meant to be managed manually or with
 
 ## CONFIGURATION
 
-Configuring Process Watch is done through a configuration tool located in the tools directory. The configuration tool will give you several options to create or manage configurations.
+Configuring Process Watch is done through a command line configuration tool located in the tools directory. The configuration tool will give you several options to create or manage configurations.
 
 `python3 /usr/local/process-watch/tools/config_tool.py`
 
@@ -64,7 +63,7 @@ The Memory Process Profiler, will monitor the memory utilization for the process
 
 **Actions**
 
-If you choose to have an action triggered we recommend you write a shell script for the action and put it in the actions directory. The shell script can be bash or language of your choosing as long as its executable and can be called by its path (ex. `/usr/local/process-watch/actions/action.sh`), also ensure the script has an interpreter defined (ex. `#!/bin/bash`). Example actions could be restarting the process, collecting troubleshooting info, notification or anything you need during when the threshold is met.
+If you choose to have an action triggered we recommend you write a shell script for the action and put it in the actions directory. The shell script can be bash or language of your choosing as long as its **executable** and can be called by its path (ex. `/usr/local/process-watch/actions/xyz-action.sh`), also ensure the script has an interpreter defined (ex. `#!/bin/bash`). Example actions could be restarting the process, collecting troubleshooting info, notification or anything you need during when the threshold is met.
 
 You can create a Memory Process Profiler via the Process Profiler Configuration Menu by choosing the option "Create Memory Process Profiler".
 
@@ -78,7 +77,7 @@ The Thread Process Profiler, will monitor the thread utilization for the process
 
 **Actions**
 
-If you choose to have an action triggered we recommend you write a shell script for the action and put it in the actions directory. The shell script can be bash or language of your choosing as long as its executable and can be called by its path (ex. `/usr/local/process-watch/actions/action.sh`), also ensure the script has an interpreter defined (ex. `#!/bin/bash`). Example actions could be restarting the process, collecting troubleshooting info, notification or anything you need during when the threshold is met.
+If you choose to have an action triggered we recommend you write a shell script for the action and put it in the actions directory. The shell script can be bash or language of your choosing as long as its **executable** and can be called by its path (ex. `/usr/local/process-watch/actions/xyz-action.sh`), also ensure the script has an interpreter defined (ex. `#!/bin/bash`). Example actions could be restarting the process, collecting troubleshooting info, notification or anything you need during when the threshold is met.
 
 You can create a Thread Process Profiler via the Process Profiler Configuration Menu by choosing the option "Create Thread Process Profiler".
 
@@ -92,7 +91,7 @@ The File Descriptor Process Profiler, will monitor the file descriptor utilizati
 
 **Actions**
 
-If you choose to have an action triggered we recommend you write a shell script for the action and put it in the actions directory. The shell script can be bash or language of your choosing as long as its executable and can be called by its path (ex. `/usr/local/process-watch/actions/action.sh`), also ensure the script has an interpreter defined (ex. `#!/bin/bash`). Example actions could be restarting the process, collecting troubleshooting info, notification or anything you need during when the threshold is met.
+If you choose to have an action triggered we recommend you write a shell script for the action and put it in the actions directory. The shell script can be bash or language of your choosing as long as its **executable** and can be called by its path (ex. `/usr/local/process-watch/actions/xyz-action.sh`), also ensure the script has an interpreter defined (ex. `#!/bin/bash`). Example actions could be restarting the process, collecting troubleshooting info, notification or anything you need during when the threshold is met.
 
 You can create a File Descriptor Process Profiler via the Process Profiler Configuration Menu by choosing the option "Create File Descriptor Process Profiler".
 
