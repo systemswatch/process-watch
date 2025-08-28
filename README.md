@@ -19,17 +19,29 @@ The Open Source version of Process Watch is meant to be managed manually or with
 
 ### Install Process Watch on Ubuntu
 
-1. `gunzip -c process-watch.tar.gz | tar -xvf - `
-2. `mv process-watch /usr/local/`
-3. `cd /usr/local/process-watch`
-4. `pip install -r requirements.txt`
-5. `/usr/local/process-watch/tools/config_tool.py`
-6. `cd /usr/local/process-watch/systemd`
-7. `sudo cp process_watch.service /etc/systemd/system/`
+1. `sudo apt -y update`
+2. `sudo apt -y install build-essential openssl`
+3. `sudo apt -y install libpq-dev libssl-dev libffi-dev zlib1g-dev`
+4. `sudo apt -y install python3-pip python3-dev`
+5. `sudo apt -y install virtualenvwrapper`
+6. `cd /home/ubuntu`
+7. `virtualenv process_watch_env`
+8. `source process_watch_env/bin/activate`
+9. `wget https://github.com/systemswatch/process-watch/archive/refs/tags/1.0.tar.gz`
+10. `gunzip -c 1.0.tar.gz | tar -xvf -`
+11. `sudo mv process-watch-1.0 /usr/local/process_watch`
+12. `cd /usr/local/process_watch`
+13. `pip install -r requirements.txt`
+   * Skip step 13 and go to step 14 if you are running process_watch as root 
+14. `sudo apt install python3-psutil`
+   * Skip step 14 if your running as a non-root user
+15. `/usr/local/process_watch/tools/config_tool.py`
+16. `cd /usr/local/process_watch/systemd`
+17. `sudo cp process_watch.service /etc/systemd/system/`
    * (Make sure to edit the process_watch.service file with your chosen user and group)
-8. `sudo systemctl daemon-reload`
-9. `sudo systemctl enable process_watch`
-10. `sudo systemctl start process_watch`
+18. `sudo systemctl daemon-reload`
+19. `sudo systemctl enable process_watch`
+20. `sudo systemctl start process_watch`
 
 ## CONFIGURATION
 
