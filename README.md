@@ -31,10 +31,10 @@ The Open Source version of Process Watch is meant to be managed manually or with
 10. `gunzip -c 1.0.tar.gz | tar -xvf -`
 11. `sudo mv process-watch-1.0 /usr/local/process_watch`
 12. `cd /usr/local/process_watch`
-If you are running process_watch as non-root user, otherwise skip to step 14
 13. `pip install -r requirements.txt`
-If you are running process_watch as root user, otherwise follow step 13
+   * Skip step 13 and go to step 14 if you are running process_watch as root 
 14. `sudo apt install python3-psutil`
+   * Skip step 14 if your running as a non-root user
 15. `/usr/local/process_watch/tools/config_tool.py`
 16. `cd /usr/local/process_watch/systemd`
 17. `sudo cp process_watch.service /etc/systemd/system/`
